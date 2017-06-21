@@ -1,5 +1,5 @@
 {
-    "name": "consoletvs/charts",
+    "name": "consoletvs/ChartsLaravel",
     "description": "Create charts for laravel using diferent charts libraries",
     "license": "MIT",
     "authors": [
