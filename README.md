@@ -1,3 +1,84 @@
+1 - composer require laravel2016/charts
+2-  Add service provider & alias
+
+Add the following service provider to the array in: config/app.php
+
+                  ConsoleTVs\Charts\ChartsServiceProvider::class,
+
+Add the following alias to the array in: config/app.php
+
+                 'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+
+Publish the assets
+
+                 php artisan vendor:publish --tag=charts_config
+
+Default Settings
+
+The file in: config/charts.php contains an array of settings, you can find the default settings in there.
+Example Usage
+
+Example Controller:
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use Charts;
+
+class TestController extends Controller
+{
+    public function index()
+    {
+        $chart = Charts::multi('bar', 'material')
+            // Setup the chart settings
+            ->title("My Cool Chart")
+            // A dimension of 0 means it will take 100% of the space
+            ->dimensions(0, 400) // Width x Height
+            // This defines a preset of colors already done:)
+            ->template("material")
+            // You could always set them manually
+            // ->colors(['#2196F3', '#F44336', '#FFC107'])
+            // Setup the diferent datasets (this is a multi chart)
+            ->dataset('Element 1', [5,20,100])
+            ->dataset('Element 2', [15,30,80])
+            ->dataset('Element 3', [25,10,40])
+            // Setup what the values mean
+            ->labels(['One', 'Two', 'Three']);
+
+        return view('test', ['chart' => $chart]);
+    }
+}
+
+Example View:
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>My Charts</title>
+
+        {!! Charts::assets() !!}
+
+    </head>
+    <body>
+        <center>
+            {!! $chart->render() !!}
+        </center>
+    </body>
+</html>
+
+
+
+
+
+
 <p align="center"><a href="https://erik.cat/projects/Charts"><img height="250" src="http://i.imgur.com/zylVNhI.png"></a></p>
 
 <p align="center">
