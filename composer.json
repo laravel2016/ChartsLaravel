@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.*",
+        "illuminate/support": "5.7.x|5.8.x|6.x|7.x",
         "jlawrence/eos": "3.*",
         "jenssegers/date": "v3.*"
     },
